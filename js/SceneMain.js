@@ -14,6 +14,8 @@ class SceneMain extends Phaser.Scene {
     	this.load.image("barrier", "images/barrier.png");
     }
     create() {
+        emitter = new Phaser.Events.EventEmitter();
+        
         //define our objects
         this.road = new Road({scene: this});
         this.road.x = game.config.width / 2;

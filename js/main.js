@@ -1,5 +1,6 @@
 let game;
 let model;
+let emitter;
 
 window.onload = function() 
 {
