@@ -28,24 +28,39 @@ class Road extends Phaser.GameObjects.Container {
     //
     //add click
     this.back.setInteractive();
-    this.back.on('pointerdown', this.changeLanes, this);
+    this.back.on("pointerdown", this.changeLanes, this);
     this.addObject();
   }
 
-  addObject()
-  {
-      let objs = ['pcar1', 'pcar2', 'cone', 'barrier'];
-      let index = Math.floor(Math.random() * 3);
-      let key = objs[index];
+  addObject() {
+    let objs = [
+      { key: "pcar1", speed: 10, scale: 10 },
+      { key: "pcar2", speed: 10, scale: 10 },
+      { key: "cone", speed: 20, scale: 5 },
+      { key: "barrier", speed: 20, scale: 8 },
+    ];
+    let index = Math.floor(Math.random() * 4);
+    let key = objs[index].key;
+    let speed = objs[index].speed;
+    let scale = objs[index].scale / 100;
 
-      this.object = this.scene.add.sprite(-this.displayWidth / 4, 0, key);
-      let lane = Math.random() * 100;
-      if (lane < 50)
-      {
-          this.object.x = this.displayWidth /4;
-      }
-      Align.scaleToGameW(this.object, 0.10);
-      this.add(this.object);
+    this.object = this.scene.add.sprite(-this.displayWidth / 4, 0, key);
+    this.object.speed = speed;
+
+    let lane = Math.random() * 100;
+    if (lane < 50) {
+      this.object.x = this.displayWidth / 4;
+    }
+    Align.scaleToGameW(this.object, scale);
+    this.add(this.object);
+  }
+
+  changeLanes() {
+    if (this.car.x > 0) {
+      this.car.x = -this.displayWidth / 4;
+    } else {
+      this.car.x = this.displayWidth / 4;
+    }
   }
 
   makeLines() {
@@ -57,17 +72,6 @@ class Road extends Phaser.GameObjects.Container {
     }
   }
 
-  changeLanes()
-  {
-      if (this.car.x > 0)
-      {
-          this.car.x =- this.displayWidth / 4;
-      }
-      else
-      {
-          this.car.x = this.displayWidth /4;
-      }
-  }
 
   moveLines() {
     this.lineGroup.children.iterate(
@@ -84,16 +88,11 @@ class Road extends Phaser.GameObjects.Container {
     }
   }
 
-  moveObject()
-  {
-    this.object.y += this.vSpace /20;
-    if (this.object.y > game.config.height)
-    {
-        this.object.destroy();
-        this.addObject();
+  moveObject() {
+    this.object.y += this.vSpace / this.object.speed;
+    if (this.object.y > game.config.height) {
+      this.object.destroy();
+      this.addObject();
     }
   }
-
-
-
 }
