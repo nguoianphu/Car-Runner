@@ -29,7 +29,21 @@ class Road extends Phaser.GameObjects.Container {
     //add click
     this.back.setInteractive();
     this.back.on('pointerdown', this.changeLanes, this);
+    this.addObject();
   }
+
+  addObject()
+  {
+      this.object = this.scene.add.sprite(-this.displayWidth / 4, 0, "pcar1");
+      let lane = Math.random() * 100;
+      if (lane < 50)
+      {
+          this.object.x = this.displayWidth /4;
+      }
+      Align.scaleToGameW(this.object, 0.10);
+      this.add(this.object);
+  }
+
   makeLines() {
     this.vSpace = this.displayHeight / 10;
     for (let i = 0; i < 20; i++) {
@@ -65,4 +79,17 @@ class Road extends Phaser.GameObjects.Container {
       });
     }
   }
+
+  moveObject()
+  {
+    this.object.y += this.vSpace /20;
+    if (this.object.y > game.config.height)
+    {
+        this.object.destroy();
+        this.addObject();
+    }
+  }
+
+
+
 }
