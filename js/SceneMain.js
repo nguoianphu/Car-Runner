@@ -27,6 +27,9 @@ class SceneMain extends Phaser.Scene {
         this.road = new Road({scene: this});
         this.road.x = game.config.width / 2;
         this.road.makeLines();
+
+        this.alignGrid = new AlignGrid({scene: this, rows: 5, cols: 5});
+        this.alignGrid.showNumber();
     }
     update() {
         //constant running loop
