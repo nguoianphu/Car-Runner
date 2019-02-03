@@ -16,6 +16,19 @@ class Road extends Phaser.GameObjects.Container {
     //
     //
     this.count = 0;
+
+    //add car
+    this.car = this.scene.add.sprite(
+      this.displayWidth / 4,
+      game.config.height * 0.9,
+      "cars"
+    );
+    Align.scaleToGameW(this.car, 0.10);
+    this.add(this.car);
+    //
+    //add click
+    this.back.setInteractive();
+    this.back.on('pointerdown', this.changeLanes, this);
   }
   makeLines() {
     this.vSpace = this.displayHeight / 10;
@@ -24,6 +37,18 @@ class Road extends Phaser.GameObjects.Container {
       line.oy = line.y;
       this.lineGroup.add(line);
     }
+  }
+
+  changeLanes()
+  {
+      if (this.car.x > 0)
+      {
+          this.car.x =- this.displayWidth / 4;
+      }
+      else
+      {
+          this.car.x = this.displayWidth /4;
+      }
   }
 
   moveLines() {
