@@ -34,7 +34,11 @@ class Road extends Phaser.GameObjects.Container {
 
   addObject()
   {
-      this.object = this.scene.add.sprite(-this.displayWidth / 4, 0, "pcar1");
+      let objs = ['pcar1', 'pcar2', 'cone', 'barrier'];
+      let index = Math.floor(Math.random() * 3);
+      let key = objs[index];
+
+      this.object = this.scene.add.sprite(-this.displayWidth / 4, 0, key);
       let lane = Math.random() * 100;
       if (lane < 50)
       {
