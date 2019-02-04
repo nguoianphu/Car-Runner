@@ -56,6 +56,7 @@ class Road extends Phaser.GameObjects.Container {
   }
 
   changeLanes() {
+    emitter.emit(G.PLAY_SOUND, "whoosh");
     if (this.car.x > 0) {
       this.car.x = -this.displayWidth / 4;
     } else {

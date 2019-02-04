@@ -20,10 +20,15 @@ class SceneMain extends Phaser.Scene {
         this.load.image("musicOn", "images/ui/icons/music_on.png");
         this.load.image("musicOff", "images/ui/icons/music_off.png");
 
+        this.load.audio("backgroundMusic", ['audio/random-race.mp3', 'audio/random-race.ogg']);
+        this.load.audio("boom", ['audio/boom.mp3', 'audio/boom.ogg']);
+        this.load.audio("whoosh", ['audio/whoosh.mp3', 'audio/whoosh.ogg']);
+
     }
     create() {
         emitter = new Phaser.Events.EventEmitter();
         controller = new Controller();
+        let mediaManager = new MediaManager({scene: this});
         //
         //
         this.sb = new ScoreBox({scene: this});
