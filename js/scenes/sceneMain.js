@@ -7,11 +7,19 @@ class SceneMain extends Phaser.Scene {
         //load our images or sounds
     	this.load.image("road", "images/road.jpg");
     	this.load.image("line", "images/line.png");
-    	this.load.spritesheet("cars", "images/cars.png", {frameWidth: 60, frameHeight: 126});
+        this.load.spritesheet("cars", "images/cars.png", {frameWidth: 60, frameHeight: 126});
+        
     	this.load.image("pcar1", "images/pcar1.png");
     	this.load.image("pcar2", "images/pcar2.png");
     	this.load.image("cone", "images/cone.png");
-    	this.load.image("barrier", "images/barrier.png");
+        this.load.image("barrier", "images/barrier.png");
+        
+        this.load.image("toggleBack", "images/ui/toggles/1.png");
+        this.load.image("sfxOff", "images/ui/icons/sfx_off.png");
+        this.load.image("sfxOn", "images/ui/icons/sfx_on.png");
+        this.load.image("musicOn", "images/ui/icons/music_on.png");
+        this.load.image("musicOff", "images/ui/icons/music_off.png");
+
     }
     create() {
         emitter = new Phaser.Events.EventEmitter();
@@ -30,6 +38,9 @@ class SceneMain extends Phaser.Scene {
 
         this.alignGrid = new AlignGrid({scene: this, rows: 5, cols: 5});
         this.alignGrid.showNumber();
+        this.alignGrid.placeAtIndex(4, this.sb);
+
+        let soundButtons = new SoundButtons({scene: this});
     }
     update() {
         //constant running loop
