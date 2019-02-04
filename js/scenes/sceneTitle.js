@@ -10,8 +10,10 @@ class SceneTitle extends Phaser.Scene {
     create() {
         emitter = new Phaser.Events.EventEmitter();
         controller = new Controller();
-
         this.alignGrid = new AlignGrid({ rows: 11, cols: 11, scene: this});
+
+        this.backImage = this.add.image(game.config.width / 2, game.config.height / 2, "titleBack");
+
         //this.alignGrid.showNumbers();
 
         let title = this.add.image(0, 0, 'title');
@@ -22,6 +24,11 @@ class SceneTitle extends Phaser.Scene {
         this.alignGrid.placeAtIndex(93, btnStart);
 
         emitter.on('start_game', this.startGame, this);
+
+        mediaManager = new MediaManager({
+            scene: this
+        });
+        mediaManager.setBackgroundMusic("backgroundMusic");
     }
 
     startGame()
